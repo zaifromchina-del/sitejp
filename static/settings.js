@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const passwordUrl = body.dataset.passwordUrl;
   const defaultAvatar = body.dataset.defaultAvatar;
   const avatarKey = `sitejp_avatar_${userId}`;
-  const prefKey = `sitejp_preferences_${userId}`;
 
   const navButtons = document.querySelectorAll("[data-settings-tab]");
   const panels = document.querySelectorAll("[data-settings-panel]");
@@ -83,7 +82,6 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       const data = await postJson(companyUrl, { empresa });
       document.querySelector(".settings-account-card strong").textContent = data.empresa;
-      document.getElementById("dataEmpresa").textContent = data.empresa;
       setFeedback(feedback, "Empresa atualizada com sucesso.");
     } catch (error) {
       setFeedback(feedback, error.message, "error");
@@ -105,37 +103,6 @@ document.addEventListener("DOMContentLoaded", () => {
       setFeedback(feedback, "Senha alterada com sucesso.");
     } catch (error) {
       setFeedback(feedback, error.message, "error");
-    }
-  });
-
-  const prefs = JSON.parse(localStorage.getItem(prefKey) || "{}");
-  const prefInputs = {
-    compact: document.getElementById("prefCompact"),
-    animations: document.getElementById("prefAnimations"),
-    excel: document.getElementById("prefExcel")
-  };
-
-  Object.entries(prefInputs).forEach(([key, input]) => {
-    input.checked = Boolean(prefs[key]);
-    input.addEventListener("change", () => {
-      prefs[key] = input.checked;
-      localStorage.setItem(prefKey, JSON.stringify(prefs));
-    });
-  });
-
-  document.getElementById("btnCopySummary").addEventListener("click", async () => {
-    const feedback = document.getElementById("dataFeedback");
-    const rows = [...document.querySelectorAll(".settings-data-list div")].map((row) => {
-      const label = row.querySelector("span").textContent;
-      const value = row.querySelector("strong").textContent;
-      return `${label}: ${value}`;
-    });
-
-    try {
-      await navigator.clipboard.writeText(rows.join("\n"));
-      setFeedback(feedback, "Resumo copiado.");
-    } catch (error) {
-      setFeedback(feedback, "Não foi possível copiar automaticamente.", "error");
     }
   });
 });

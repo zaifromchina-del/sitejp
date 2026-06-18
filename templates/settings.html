@@ -29,9 +29,9 @@
   <main class="page page--settings">
     <section class="settings-hero">
       <div>
-        <p class="eyebrow">Preferências do usuário</p>
+        <p class="eyebrow">Configurações do usuário</p>
         <h1 class="page-title">Configurações</h1>
-        <p class="page-subtitle">Gerencie sua conta, segurança e preferências de uso do sistema.</p>
+        <p class="page-subtitle">Gerencie sua conta, perfil e segurança do sistema.</p>
       </div>
       <div class="settings-account-card">
         <img class="avatar avatar--large" id="settingsAvatarTop" src="{{ url_for('static', filename='avatar.png') }}" alt="Perfil">
@@ -43,24 +43,15 @@
     </section>
 
     <section class="settings-shell">
-      <aside class="settings-sidebar" aria-label="Menus de configurações">
+      <aside class="settings-sidebar" aria-label="Menu de configurações">
         <button class="settings-nav is-active" type="button" data-settings-tab="conta">
           <span>Minha conta</span>
-        </button>
-        <button class="settings-nav" type="button" data-settings-tab="seguranca">
-          <span>Segurança</span>
         </button>
         <button class="settings-nav" type="button" data-settings-tab="perfil">
           <span>Perfil</span>
         </button>
-        <button class="settings-nav" type="button" data-settings-tab="preferencias">
-          <span>Preferências</span>
-        </button>
-        <button class="settings-nav" type="button" data-settings-tab="dados">
-          <span>Dados</span>
-        </button>
-        <button class="settings-nav" type="button" data-settings-tab="ajuda">
-          <span>Ajuda</span>
+        <button class="settings-nav" type="button" data-settings-tab="seguranca">
+          <span>Segurança</span>
         </button>
       </aside>
 
@@ -102,6 +93,25 @@
           </div>
         </section>
 
+        <section class="settings-panel" data-settings-panel="perfil" hidden>
+          <div class="settings-panel-head">
+            <div>
+              <h2>Perfil</h2>
+              <p>Personalize a imagem que aparece no menu superior deste navegador.</p>
+            </div>
+          </div>
+
+          <div class="profile-editor">
+            <img class="avatar avatar--xl" id="settingsAvatarPreview" src="{{ url_for('static', filename='avatar.png') }}" alt="Perfil">
+            <div class="profile-editor-actions">
+              <label class="btn primary file-btn" for="avatarInput">Escolher foto</label>
+              <input id="avatarInput" type="file" accept="image/*" hidden>
+              <button class="btn ghost" id="btnRemoveAvatar" type="button">Remover foto</button>
+              <small>A foto fica salva localmente no navegador.</small>
+            </div>
+          </div>
+        </section>
+
         <section class="settings-panel" data-settings-panel="seguranca" hidden>
           <div class="settings-panel-head">
             <div>
@@ -134,103 +144,6 @@
             </div>
             <p class="settings-feedback" id="passwordFeedback" hidden></p>
           </form>
-        </section>
-
-        <section class="settings-panel" data-settings-panel="perfil" hidden>
-          <div class="settings-panel-head">
-            <div>
-              <h2>Perfil</h2>
-              <p>Personalize a imagem que aparece no menu superior deste navegador.</p>
-            </div>
-          </div>
-
-          <div class="profile-editor">
-            <img class="avatar avatar--xl" id="settingsAvatarPreview" src="{{ url_for('static', filename='avatar.png') }}" alt="Perfil">
-            <div class="profile-editor-actions">
-              <label class="btn primary file-btn" for="avatarInput">Escolher foto</label>
-              <input id="avatarInput" type="file" accept="image/*" hidden>
-              <button class="btn ghost" id="btnRemoveAvatar" type="button">Remover foto</button>
-              <small>A foto fica salva localmente no navegador.</small>
-            </div>
-          </div>
-        </section>
-
-        <section class="settings-panel" data-settings-panel="preferencias" hidden>
-          <div class="settings-panel-head">
-            <div>
-              <h2>Preferências</h2>
-              <p>Ajustes rápidos para deixar o uso diário mais confortável.</p>
-            </div>
-          </div>
-
-          <div class="settings-options">
-            <label class="settings-option">
-              <input type="checkbox" id="prefCompact">
-              <span>
-                <strong>Interface compacta</strong>
-                <small>Reduz espaçamentos em listas e tabelas neste navegador.</small>
-              </span>
-            </label>
-            <label class="settings-option">
-              <input type="checkbox" id="prefAnimations">
-              <span>
-                <strong>Reduzir animações</strong>
-                <small>Diminui transições visuais quando você preferir uma navegação mais direta.</small>
-              </span>
-            </label>
-            <label class="settings-option">
-              <input type="checkbox" id="prefExcel">
-              <span>
-                <strong>Priorizar importação por Excel</strong>
-                <small>Marca sua preferência para cadastros futuros neste navegador.</small>
-              </span>
-            </label>
-          </div>
-          <p class="settings-feedback success" id="prefFeedback">Preferências salvas automaticamente.</p>
-        </section>
-
-        <section class="settings-panel" data-settings-panel="dados" hidden>
-          <div class="settings-panel-head">
-            <div>
-              <h2>Dados</h2>
-              <p>Consulte um resumo simples da sua conta.</p>
-            </div>
-          </div>
-
-          <div class="settings-data-list">
-            <div><span>Empresa</span><strong id="dataEmpresa">{{ user.empresa }}</strong></div>
-            <div><span>Email</span><strong>{{ user.email }}</strong></div>
-            <div><span>Projetos</span><strong>{{ projetos_count }}</strong></div>
-            <div><span>Conta</span><strong>{% if user.aprovado %}Ativa{% else %}Pendente{% endif %}</strong></div>
-          </div>
-          <div class="form-actions">
-            <button class="btn ghost" id="btnCopySummary" type="button">Copiar resumo</button>
-          </div>
-          <p class="settings-feedback" id="dataFeedback" hidden></p>
-        </section>
-
-        <section class="settings-panel" data-settings-panel="ajuda" hidden>
-          <div class="settings-panel-head">
-            <div>
-              <h2>Ajuda</h2>
-              <p>Atalhos úteis para manter os projetos organizados.</p>
-            </div>
-          </div>
-
-          <div class="help-list">
-            <article>
-              <h3>Nomeie projetos com contexto</h3>
-              <p>Use nomes que indiquem área, responsável ou objetivo da análise.</p>
-            </article>
-            <article>
-              <h3>Revise a planilha antes de importar</h3>
-              <p>O formato esperado é Período e D.Real, com números válidos nas linhas de demanda.</p>
-            </article>
-            <article>
-              <h3>Compare métodos quando houver dúvida</h3>
-              <p>A tela do projeto mostra primeiro o melhor método, mas os demais continuam disponíveis para auditoria.</p>
-            </article>
-          </div>
         </section>
       </div>
     </section>

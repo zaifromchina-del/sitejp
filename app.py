@@ -157,7 +157,6 @@ def _display_method_name(name):
         "media_exponencial_0.80": "Média Exponencial Móvel (a = 0,80)",
         "ajuste_tendencia_holt": "Ajustamento Exponencial com Tendência (Holt)",
         "equacao_linear": "Equação Linear",
-        "sazonalidade_tendencia_3": "Sazonalidade com Tendência (3 períodos)",
         "sazonalidade_simples_12": "Sazonalidade Simples (12 períodos)",
         "sazonalidade_tendencia_12": "Sazonalidade com Tendência (12 períodos)",
     }
@@ -174,7 +173,6 @@ def _run_forecasting_models(demandas_int):
         exp_smoothing(demandas_int, 0.80),
         holt_from_excel(demandas_int, 0.70, 0.30),
         linear_regression_trend(demandas_int),
-        seasonal_trend(demandas_int, 3),
         seasonal_simple(demandas_int, 12),
         seasonal_trend(demandas_int, 12),
     ]
