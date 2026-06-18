@@ -37,8 +37,8 @@
   z-index:1;
   min-height:calc(100vh - 72px);
   display:grid;
-  grid-template-columns:minmax(300px, 1.05fr) minmax(320px, 470px);
-  gap:28px;
+  grid-template-columns:minmax(320px, 470px);
+  justify-content:center;
   align-items:center;
   max-width:1220px;
   margin:0 auto;
@@ -51,6 +51,7 @@
 }
 
 .auth-hero{
+  display:none;
   max-width:640px;
 }
 
@@ -174,10 +175,7 @@
 @media (max-width:960px){
   .auth-shell{
     grid-template-columns:1fr;
-    align-items:start;
-  }
-  .auth-hero{
-    max-width:none;
+    justify-content:stretch;
   }
 }
 
