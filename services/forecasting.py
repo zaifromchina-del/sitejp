@@ -272,7 +272,7 @@ def seasonal_simple(d: List[float], season_length: int = 12) -> ModelResult:
     deseasonalized = [d[idx] / indices[idx % season_length] for idx in range(n)]
     level = sum(deseasonalized) / len(deseasonalized)
 
-    for idx in range(n):
+    for idx in range(season_length, n):
         pred = level * indices[idx % season_length]
         forecast[idx] = pred
         err = d[idx] - pred
