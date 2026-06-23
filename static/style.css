@@ -2087,3 +2087,161 @@ textarea,
 select{
   border-radius:8px;
 }
+
+/* Visual polish pass */
+:root{
+  --line:rgba(148, 163, 184, 0.10);
+  --shadow:0 10px 24px rgba(0, 0, 0, 0.16);
+}
+
+.topbar{
+  min-height:68px;
+  padding:12px 24px;
+}
+
+.brand{
+  max-width:min(58vw, 360px);
+  letter-spacing:0;
+  text-transform:none;
+}
+
+.brand span{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.brand-logo{
+  flex:0 0 auto;
+  width:34px;
+  height:34px;
+}
+
+.page{
+  padding-top:24px;
+}
+
+.dashboard-hero,
+.admin-hero,
+.settings-hero{
+  padding:22px 24px;
+  border-color:rgba(120, 153, 178, 0.12);
+  background:#111b24;
+  box-shadow:0 12px 28px rgba(0,0,0,0.14);
+}
+
+.card,
+body[data-page="dashboard"] .card,
+.detail-page .card,
+.detail-page .acc-item,
+.detail-page .winner-pill,
+.detail-page .metric,
+.detail-page .chart-panel,
+.detail-page .table-wrap,
+.settings-panel,
+.settings-sidebar,
+.admin-table-card,
+.admin-toolbar,
+.demanda-wrap,
+.form,
+.login-card{
+  border-color:rgba(120, 153, 178, 0.11);
+  background:#111b24;
+  box-shadow:0 10px 22px rgba(0,0,0,0.14);
+}
+
+.card{
+  padding:17px 18px;
+}
+
+.card-link:hover{
+  transform:translateY(-2px);
+  box-shadow:0 14px 26px rgba(0,0,0,0.18);
+  background:#13202b;
+}
+
+.badge,
+.tag,
+.mini,
+.stat-pill,
+.status-pill,
+.settings-checklist span,
+body[data-page="dashboard"] .badge,
+body[data-page="dashboard"] .stat-pill,
+.detail-page .tag,
+.detail-page .badge,
+.detail-page .mini{
+  min-height:26px;
+  padding:4px 9px;
+  border-radius:6px;
+  background:rgba(76, 111, 140, 0.10);
+  border-color:rgba(120, 153, 178, 0.12);
+  color:#c2d1dc;
+  box-shadow:none;
+  font-size:.79rem;
+}
+
+.hero-mini-card,
+.stat-card,
+.settings-info-card,
+.metric{
+  padding:13px 14px;
+  background:rgba(255,255,255,0.018);
+  box-shadow:none;
+}
+
+.metric{
+  border-color:rgba(120, 153, 178, 0.10);
+}
+
+.winner-pill{
+  padding:13px 16px;
+}
+
+.method-note{
+  padding:8px 0;
+  border:0;
+  border-radius:0;
+  background:transparent;
+}
+
+.acc-sum{
+  padding:12px 14px;
+}
+
+.acc-sum--detail{
+  background:#111b24;
+}
+
+.chart-panel{
+  padding:14px;
+}
+
+.btn{
+  min-height:40px;
+  padding:9px 14px;
+}
+
+.card-delete,
+.admin-delete{
+  padding:8px 11px;
+  background:rgba(239,68,68,0.08);
+}
+
+input,
+textarea,
+select{
+  padding:12px 13px;
+  background:#131f29;
+}
+
+@media (max-width:640px){
+  .brand{
+    max-width:52vw;
+  }
+
+  .brand-logo{
+    width:32px;
+    height:32px;
+  }
+}
