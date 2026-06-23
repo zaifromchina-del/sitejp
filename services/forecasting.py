@@ -229,7 +229,7 @@ def seasonal_simple(d: List[float], season_length: int = 12) -> ModelResult:
         level = sum(base_cycle) / season_length if season_length else 0
         indices = [1.0] * season_length if level == 0 else [v / level for v in base_cycle]
 
-        for idx in range(n):
+        for idx in range(season_length, n):
             pred = level * indices[idx % season_length]
             forecast[idx] = pred
             err = d[idx] - pred
@@ -242,7 +242,7 @@ def seasonal_simple(d: List[float], season_length: int = 12) -> ModelResult:
             forecast=forecast,
             error=error,
             abs_error=abs_error,
-            mad=_mad_from_abs(abs_error, start_idx=0),
+            mad=_mad_from_abs(abs_error, start_idx=season_length),
             next_forecast=level * indices[n % season_length],
         )
 
