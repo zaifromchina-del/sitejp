@@ -213,7 +213,7 @@ def seasonal_simple(d: List[float], season_length: int = 12) -> ModelResult:
     error = [None] * n
     abs_error = [None] * n
 
-    if n < season_length:
+    if n < season_length * 2:
         return ModelResult(
             name=f"sazonalidade_simples_{season_length}",
             params={"periodo_sazonal": season_length},
@@ -222,31 +222,6 @@ def seasonal_simple(d: List[float], season_length: int = 12) -> ModelResult:
             abs_error=abs_error,
             mad=None,
             next_forecast=None,
-        )
-
-    if n < season_length * 2:
-        base_cycle = [float(v) for v in d[:season_length]]
-        level = sum(base_cycle) / season_length if season_length else 0
-        if level == 0:
-            indices = [1.0] * season_length
-        else:
-            indices = [v / level for v in base_cycle]
-
-        for idx in range(n):
-            pred = level * indices[idx % season_length]
-            forecast[idx] = pred
-            err = d[idx] - pred
-            error[idx] = err
-            abs_error[idx] = abs(err)
-
-        return ModelResult(
-            name=f"sazonalidade_simples_{season_length}",
-            params={"periodo_sazonal": season_length},
-            forecast=forecast,
-            error=error,
-            abs_error=abs_error,
-            mad=_mad_from_abs(abs_error, start_idx=0),
-            next_forecast=level * indices[n % season_length],
         )
 
     centered = _centered_moving_average(d, season_length)

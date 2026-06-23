@@ -157,33 +157,24 @@ def _display_method_name(name):
         "media_exponencial_0.80": "Média Exponencial Móvel (a = 0,80)",
         "ajuste_tendencia_holt": "Ajustamento Exponencial com Tendência (Holt)",
         "equacao_linear": "Equação Linear",
+        "sazonalidade_simples_12": "Sazonalidade Simples (12 períodos)",
+        "sazonalidade_tendencia_12": "Sazonalidade com Tendência (12 períodos)",
     }
-    if name and name.startswith("sazonalidade_simples_"):
-        periodos = name.rsplit("_", 1)[-1]
-        return f"Sazonalidade Simples ({periodos} períodos)"
-    if name and name.startswith("sazonalidade_tendencia_"):
-        periodos = name.rsplit("_", 1)[-1]
-        return f"Sazonalidade com Tendência ({periodos} períodos)"
     return labels.get(name, name or "-")
 
 
-def _seasonal_lengths(total_periods):
-    return [length for length in (6, 12) if total_periods >= length]
-
-
 def _run_forecasting_models(demandas_int):
-    seasonal_lengths = _seasonal_lengths(len(demandas_int))
     results = [
         moving_average(demandas_int, 3),
         moving_average(demandas_int, 6),
         moving_average(demandas_int, 12),
-        *[seasonal_simple(demandas_int, length) for length in seasonal_lengths],
         exp_smoothing(demandas_int, 0.10),
         exp_smoothing(demandas_int, 0.50),
         exp_smoothing(demandas_int, 0.80),
         holt_from_excel(demandas_int, 0.70, 0.30),
         linear_regression_trend(demandas_int),
-        *[seasonal_trend(demandas_int, length) for length in seasonal_lengths],
+        seasonal_simple(demandas_int, 12),
+        seasonal_trend(demandas_int, 12),
     ]
     eval_start = 13 if len(demandas_int) >= 13 else 2
     return choose_best_model(results, eval_start_period=eval_start)
